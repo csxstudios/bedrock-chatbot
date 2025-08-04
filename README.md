@@ -14,3 +14,5 @@ Simple RAG chatbot using a Bedrock Knowledge Base w/ an S3 vector store
 4. API Gateway Setup
     - Create an API using Amazon API Gateway w/ a POST method to trigger the above lambda function
 
+## Architecture
+![alt text](https://github.com/csxstudios/bedrock-chatbot/blob/main/bedrock-chatbot-architecture.png?raw=true)
