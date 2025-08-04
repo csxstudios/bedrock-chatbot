@@ -4,45 +4,290 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AI Workgroup</title>
+    <title>Bedrock Chatbot</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     <style>
-        body {
-            background-color: #eee;
+        #chat2 .form-control {
+            border-color: transparent;
+        }
+
+        #chat2 .form-control:focus {
+            border-color: transparent;
+            box-shadow: inset 0px 0px 0px 1px transparent;
+        }
+
+        .divider:after,
+        .divider:before {
+            content: "";
+            flex: 1;
+            height: 1px;
+            background: #eee;
+        }
+
+        .bg-ai {
+            background-color: #f5f6f7;
+        }
+
+        svg {
+            height: 3em;
+        }
+
+        #metadata-source {
+            display: none;
+        }
+
+        #loader circle:nth-of-type(1) {
+            opacity: 0.35;
+            animation: fade 0.7s cubic-bezier(0.39, 0.58, 0.57, 1) 0s infinite alternate-reverse;
+        }
+
+        #loader circle:nth-of-type(2) {
+            opacity: 0.35;
+            animation: fade 0.7s cubic-bezier(0.39, 0.58, 0.57, 1) 0.4s infinite alternate-reverse;
+        }
+
+        #loader circle:nth-of-type(3) {
+            opacity: 0.35;
+            animation: fade 0.7s cubic-bezier(0.39, 0.58, 0.57, 1) 0.8s infinite alternate-reverse;
+        }
+
+        #loader circle:nth-of-type(4) {
+            -webkit-animation: expandBigger 0.5s infinite alternate 0.4s;
+            animation: expandBigger 0.5s infinite alternate 0.4s;
+        }
+
+        #loader circle:nth-of-type(5) {
+            -webkit-animation: expandTiny 0.5s infinite alternate;
+            animation: expandTiny 0.5s infinite alternate;
+        }
+
+        #loader path {
+            -webkit-animation: expandBiggest 1s linear infinite alternate;
+            animation: expandBiggest 1s linear infinite alternate;
+        }
+
+        @-webkit-keyframes fade {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0.45;
+            }
+        }
+
+        @keyframes fade {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0.45;
+            }
+        }
+
+        @-webkit-keyframes expandTiny {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: translate(4.1px, -7.48px) scale(1.1);
+            }
+        }
+
+        @keyframes expandTiny {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: translate(4.1px, -7.48px) scale(1.1);
+            }
+        }
+
+        @-webkit-keyframes expandBigger {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: translate(2.52px, -6.26px) scale(1.1);
+            }
+        }
+
+        @keyframes expandBigger {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: translate(2.52px, -6.26px) scale(1.1);
+            }
+        }
+
+        @-webkit-keyframes expandBiggest {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: translate(-0.525px, -0.9487500191px) scale(1.025);
+            }
+        }
+
+        @keyframes expandBiggest {
+            from {
+                transform: scale(1);
+            }
+
+            to {
+                transform: translate(-0.525px, -0.9487500191px) scale(1.025);
+            }
+        }
+
+        #loading {
+            top: -3.5em;
         }
     </style>
 </head>
 
-<body class="bg-dark text-white">
-    <section>
-        <div class="container mt-5">
-            <h1>AI Workgoup Projects</h1>
-            <div class="row mt-5">
-                <div class="col-sm">
-                    <div class="card bg-light text-dark">
-                        <a href="bedrock-chatbot-architecture.png" target="_blank" title="view full bedrock chatbot architecture image"><img class="card-img-top" src="bedrock-chatbot-architecture.png" alt="Card image cap" /></a>
-                        <div class="card-body border-top">
-                            <h5 class="card-title">TAGGS Bedrock Chatbot</h5>
-                            <p class="card-text">RAG chatbot utilizing an Amazon Bedrock Knowledge Base with data from web scraping the<a href="https://taggs.hhs.gov" target="_blank" title="TAGGS website">TAGGS website</a> to text files uploaded to an S3 bucket. Click the thumbnail above to view the architecture.</p>
-                            <p>*WARNING* Bedrock Knowledge Base's typically uses OpenSearch Serverless for its vectore store, which is NOT pay-per-use. The OpenSearch Serverless service is charged at $0.24/hr for 2 OCUs at a minimum. This equates to $11.52/day or $4,204.80/year. As an alternative, S3 vectors preview is available with a reported 90% cost savings.</p>
-                            <p>Tech stack, sample code and other details are on github:</p>
-                            <p class="card-text">
-                                <small class="text-muted">Last updated 8/1/2025</small>
-                            </p>
-                        </div>
-                        <div class="card-footer text-center">
-                            <a href="taggs-bedrock-chatbot.html" class="btn btn-primary w-100">Launch</a>
+<body style="background-color:#eee">
+    <section class="pb-4">
+        <div class="border rounded-5">
+            <section class="p-4 w-100" style="background-color: #eee; border-radius: 0.5rem 0.5rem 0 0">
+
+                <form id="chatform">
+                    <div class="row d-flex justify-content-center">
+                        <div class="col-md-10 col-lg-8 col-xl-6">
+                            <div class="card" id="chat2">
+                                <div class="card-header d-flex justify-content-between align-items-center p-3">
+                                    <h5 class="mb-0">🤖 RAG Chatbot - Powered by Amazon Bedrock</h5>
+                                </div>
+                                <div id="chatbox" class="card-body perfect-scrollbar ps ps--active-y"
+                                    data-mdb-perfect-scrollbar="true"
+                                    style="position: relative; height: 70vh; overflow-y: scroll">
+                                    <div class="d-flex flex-row justify-content-start">
+                                        <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                                            alt="avatar 1" style="width: 45px; height: 100%" /> -->
+                                        <div>
+                                            <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7">
+                                                How can I assist you today?
+                                            </p>
+                                            <!-- <p class="small ms-3 mb-3 rounded-3 text-muted">23:58</p> -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div
+                                    class="card-footer text-muted d-flex justify-content-start align-items-center p-3 position-relative">
+                                    <div id="loading" class="position-absolute d-none">
+                                        <svg version="1.1" id="loader" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                            viewBox="-49.5 -1.8 129 84.5"
+                                            style="enable-background:new -49.5 -1.8 129 84.5;" xml:space="preserve">
+                                            <path style="fill:#E9E9E9;" d="M42.4,73.3H-0.4c-18.1,0-33-14.8-33-33v-4.7c0-18.1,14.9-33,33-33h42.8c18.2,0,33,14.9,33,33v4.7
+	C75.4,58.5,60.5,73.3,42.4,73.3z" />
+                                            <circle style="fill:#C8C8C8;" cx="1" cy="38" r="9" />
+                                            <circle style="fill:#C8C8C8;" cx="21" cy="38" r="9" />
+                                            <circle style="fill:#C8C8C8;" cx="41" cy="38" r="9" />
+                                            <circle style="fill:#E9E9E9;" cx="-25.2" cy="62.6" r="10.8" />
+                                            <circle style="fill:#E9E9E9;" cx="-41" cy="74.8" r="5" />
+                                        </svg>
+                                    </div>
+                                    <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp"
+                                    alt="avatar 3" style="width: 40px; height: 100%" /> -->
+                                    <!-- <div>YOU: </div> -->
+                                    <input type="text" class="form-control form-control-lg" id="user-question"
+                                        placeholder="Type message" />
+                                    <!-- <a class="ms-1 text-muted" href="#!"><i class="fas fa-paperclip"></i></a>
+                                <a class="ms-3 text-muted" href="#!"><i class="fas fa-smile"></i></a> -->
+                                    <button id="send" class="btn btn-primary ms-3" type="submit"><i
+                                            class="fas fa-paper-plane"></i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-sm"></div>
-                <div class="col-sm"></div>
-            </div>
+                </form>
+            </section>
         </div>
     </section>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <script>
+        let history = [];
+        var session = "session" + Date.now();
+        $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+
+        $("#chatform").submit((e) => {
+            e.preventDefault();
+
+            $("#loading").toggleClass("d-none");
+
+            var message = $("#user-question").val()
+            var timestamp = new Date().toLocaleTimeString();
+            var requestBody = JSON.stringify({ message, history });
+            console.log("requestBody", requestBody);
+
+            sendMessage(message, timestamp);
+
+            $.ajax({
+                method: "POST",
+                url: "API_GATEWAY_URL_GOES_HERE",
+                data: requestBody,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-api-key': 'API_KEY_GOES_HERE'
+                },
+                success: (data) => {
+                    console.log(data)
+                    var timestamp = new Date().toLocaleTimeString();
+
+                    var msgWrapper = $("<div/>").addClass("d-flex flex-row justify-content-start")
+                    var msgBody = $("<p/>").addClass("small p-2 ms-3 mb-1 rounded-3 bg-ai").text(data.response);
+                    var msgTimestamp = $("<p/>").addClass("small ms-3 mb-3 rounded-3 text-muted").text(timestamp);
+                    var msgContent = $("<div/>").append(msgBody, msgTimestamp)
+                    if ("sources" in data) {
+                        var sources = $("<div/>");
+                        var metadata = data.sources[0].metadata;
+                        for (const property in metadata) {
+                            if (property == 'url') {
+                                sources.append($("<a/>").attr({ "id": `metadata-${property}`, "href": metadata[property], "target": "_blank" }).addClass("small ms-3 mb-3 rounded-3 text-info").text(`${metadata[property]}`));
+                            } else {
+                                sources.append($("<p/>").attr("id", `metadata-${property}`).addClass("small ms-3 mb-0 rounded-3 text-info").text(`Source: ${metadata[property]}`));
+                            }
+
+                        }
+                        // var sources = $("<p/>").addClass("small ms-3 mb-3 rounded-3 text-info").text("Source: " + data.sources[0].metadata.source);
+                        var msgContent = $("<div/>").append(msgBody, msgTimestamp, sources)
+                    }
+                    var newMsg = msgWrapper.append(msgContent);
+
+                    $("#loading").toggleClass("d-none");
+                    $("#chatbox").append(newMsg);
+                    $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+
+                    history.push({ user: message, assistant: data.response });
+                }
+            });
+
+        })
+
+        function sendMessage(message, timestamp) {
+            var msgWrapper = $("<div/>").addClass("d-flex flex-row justify-content-end mb-4 pt-1")
+            var msgBody = $("<p/>").addClass("small p-2 me-3 mb-1 text-white rounded-3 bg-primary").text(message);
+            var msgTimestamp = $("<p/>").addClass("small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end").text(timestamp);
+            var msgContent = $("<div/>").append(msgBody, msgTimestamp)
+            var newMsg = msgWrapper.append(msgContent);
+            $("#chatbox").append(newMsg);
+            $("#user-question").val("");
+            $('#chatbox').scrollTop($('#chatbox')[0].scrollHeight);
+        }
+    </script>
 </body>
 
 </html>
